@@ -1,0 +1,21 @@
+$b-h: 400px;
+
+.swiper-container {
+  width: 100%;
+  min-height: $b-h;
+  height: 100%;
+}
+
+.swiper {
+  width: 100vw;
+  height: $b-h;
+
+  image,
+  img {
+    height: $b-h !important;
+  }
+
+  .img_banner {
+    width: 100%;
+  }
+}

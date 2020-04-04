@@ -1,0 +1,14 @@
+{
+  "miniprogramRoot": "./dist/weapp",
+  "projectname": "projectSvelte",
+  "description": "projectSvelte",
+  "appid": "wx4aca78d5e3b97669",
+  "setting": {
+    "urlCheck": true,
+    "es6": false,
+    "postcss": false,
+    "minified": false,
+    "checkSiteMap": true
+  },
+  "compileType": "miniprogram"
+}

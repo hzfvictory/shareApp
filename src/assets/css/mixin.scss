@@ -1,0 +1,93 @@
+/* function
+-------------------------- */
+$dpi: 2 !default;
+@function second($val) {
+  @return round($val * $dpi);
+}
+
+/* colors
+-------------------------- */
+//修改TAROUI样式
+$color-brand: rgba(20, 201, 201, 1);
+
+
+$bg-color-base: #fff;
+$text-color-base: #fff;
+$primary: #2D2F3A;
+$disable: #b3b3b3;
+
+
+$warning: #ead1a6;
+$danger: rgba(234, 103, 92, 1);
+$success: $color-brand;
+
+$color-error: $danger;
+
+$page-bg: rgba(249, 249, 249, 1);
+$nav-color:#2D2F3A;
+$border: 1PX solid rgba(198, 198, 198, 1);
+
+$border-color: #f0f0f0;
+$text-color: rgba(26, 26, 26, 1);
+
+$btn-color: #14c9c9;
+$btn-bg: rgba(238, 238, 238, 1);
+$inp-color: rgba(245, 245, 245, 1);
+
+$loading-color: #21CECE;
+
+$box-shadow: 0px 20Px 20Px 0px rgba(0, 0, 0, 0.08);
+$cord-shadow: 0 second(4px) second(20px) 0 rgba(0, 0, 0, 0.06);
+$cord-shadow-hover: 0 second(4px) second(20px) 0 rgba(0, 0, 0, 0.1);
+$border-radius: second(4px);
+
+$gradient: linear-gradient(180deg, #4d4d4d 0%, #2D2F3A 100%);
+
+/* methods
+-------------------------- */
+// 背景图片地址和大小
+@mixin bg($url) {
+  background-image: url($url);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+// 定位上下左右居中
+@mixin center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// 定位上下居中
+@mixin ct {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+// 定位左右居中
+@mixin cl {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+//多行显示省略号
+@mixin noWrapline($line:2) {
+  display: -webkit-box;
+  -webkit-line-clamp: $line;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /*! autoprefixer: off */
+  -webkit-box-orient: vertical;
+  /* autoprefixer: on */
+}
+
+// flex 布局和 子元素 对其方式
+@mixin fj($type: space-between) {
+  display: flex;
+  justify-content: $type;
+}
+
