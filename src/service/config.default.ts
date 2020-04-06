@@ -4,12 +4,12 @@
  * Description:一些配置项,和状态码
  */
 
-export const DEVURL = "https://www.jing999.cn/api";//测试服务器
-export const PRODUCTURL = "https://www.jing999.cn/api"; // 生产环境，线上服务器
+export const DEVURL = "https://www.jing999.cn";//测试服务器
+export const PRODUCTURL = "https://www.jing999.cn"; // 生产环境，线上服务器
 export const MOCKHOST = "https://www.easy-mock.com/mock/5d5227e2d981d40171ed9808"; //Easy Mock 模拟接口数据
 
 export const BASE_URL: string = process.env.NODE_ENV === "development" ? DEVURL : PRODUCTURL;
-
+export const PREFIX = "/api";
 
 export const HTTP_ERROR: any = {
   '400': '发出的请求有错误，服务器没有进行新建或修改数据的操作。',

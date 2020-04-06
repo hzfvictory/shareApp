@@ -25,6 +25,10 @@ yarn dev:weapp
 
 ![](https://ae01.alicdn.com/kf/Hd9ba1f342e6d47bc81890f6ddf1b5c97P.jpg)
 
+## H5预览版
+
+[www.jing999.cn](https://www.jing999.cn)
+
 ## 服务端
 
 暂不开源
