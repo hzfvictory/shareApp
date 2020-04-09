@@ -1,8 +1,10 @@
-import Taro, {Component, Config} from '@tarojs/taro'
+import Taro, {Config} from '@tarojs/taro'
+import {Component} from "@/bases"
 import {View} from '@tarojs/components'
-import * as Conf from './config'
 import {AtGrid} from "taro-ui"
 import {jumpUrl} from "@/utils/router"
+import {queryArticleList} from "./service"
+import {USERID} from "@/utils/constants"
 
 interface IState {
   dataList: any[]
@@ -15,48 +17,36 @@ export default class Index extends Component<IState> {
   };
 
   state = {
-    dataList: [
-      {
-        id: Conf.TOPIC_ONE.index,
-        url: Conf.TOPIC_ONE.url,
-        image: Conf.TOPIC_ONE.image,
-        value: Conf.TOPIC_ONE.name
-      },
-      {
-        id: Conf.TOPIC_TWO.index,
-        url: Conf.TOPIC_TWO.url,
-        image: Conf.TOPIC_TWO.image,
-        value: Conf.TOPIC_TWO.name
-      },
-      {
-        id: Conf.TOPIC_THREE.index,
-        url: Conf.TOPIC_THREE.url,
-        image: Conf.TOPIC_THREE.image,
-        value: Conf.TOPIC_THREE.name
-      },
-      {
-        id: Conf.TOPIC_FOUR.index,
-        url: Conf.TOPIC_FOUR.url,
-        image: Conf.TOPIC_FOUR.image,
-        value: Conf.TOPIC_FOUR.name
-      },
-      {
-        id: Conf.TOPIC_FIVE.index,
-        url: Conf.TOPIC_FIVE.url,
-        image: Conf.TOPIC_FIVE.image,
-        value: Conf.TOPIC_FIVE.name
-      },
-      {
-        id: Conf.TOPIC_SIX.index,
-        url: Conf.TOPIC_SIX.url,
-        image: Conf.TOPIC_SIX.image,
-        value: Conf.TOPIC_SIX.name
-      },
-    ]
+    dataList: []
   };
 
-  handlerClick = ({value}, id) => {
-    jumpUrl(`/pages/detail/index?id=${id}&value=${value}&title=怎么这么懒呢还不添加上`)
+  componentDidMount(): void {
+    this.queryList()
+  }
+
+  queryList = async () => {
+    const result = this.handleResultData(await queryArticleList(USERID));
+    const draftData = [];
+    result.map((item) => {
+      let image = item.avatar && item.avatar[0]['url'];
+      let obj = {
+        image,
+        value: item.name,
+        ...item
+      };
+      // @ts-ignore
+      draftData.push(obj)
+    });
+
+    console.log(draftData);
+
+    this.setState({
+      dataList: draftData
+    })
+  };
+
+  handlerClick = (item) => {
+    jumpUrl(`/pages/article-list/index?id=${item._id}&value=${item.name}`)
   };
 
   render() {

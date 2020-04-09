@@ -29,7 +29,7 @@ export default class Index extends Component<TProps> {
             {
               thumb == null ?
                 <Image className='article-thumb'
-                       src='https://ae01.alicdn.com/kf/H5a9b8958a652477392a630805cf53a06y.png'
+                       src='https://imgssl.justcome.cn/Fs_QMcioOUnMxoFH0Uckowl_QPRW?imageView2/2/w/640/interlace/1'
                 /> :
                 <Image className='article-thumb'
                        src={thumb}
@@ -52,7 +52,7 @@ export default class Index extends Component<TProps> {
             </View>
           </View>
         </View>
-        <AtDivider height='16Px' lineColor='#ccc'/>
+        <AtDivider height='5Px' lineColor='#e0e0e0'/>
       </View>
     )
   }

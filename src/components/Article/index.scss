@@ -10,6 +10,7 @@
   height: 80Px;
   width: 80Px;
   margin-left: 8Px;
+  border-radius: 4PX;
 }
 
 // 文章内容
@@ -28,18 +29,19 @@
 
 //文章标签
 .article-tag {
-  margin-top: 20Px;
+  //margin-top: 20Px;
   padding: 2Px;
   display: flex;
 }
 
 .author, .publish-date {
-  margin-left: 2Px;
+  margin-left: 4Px;
   font-size: 12PX;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+  vertical-align: middle;
 }
 
 .author-view, .publish-view {

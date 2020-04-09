@@ -37,6 +37,7 @@ class App extends Component {
       'pages/topics/index',
       'pages/about/index',
       'pages/detail/index',
+      'pages/article-list/index',
     ],
     subPackages: [
       {

@@ -20,16 +20,17 @@ export default class Index extends Component {
     return (
       <Swiper
         className={!home ? 'swiper-container' : 'swiper'}
-        circular
         indicatorDots
         indicatorColor='#999'
         indicatorActiveColor='#bf708f'
         autoplay
+        circular
+        easingFunction={'easeInOutCubic'}
       >
         {
           banner.map((item, index) => (
             <SwiperItem key={index}>
-              <Image mode='widthFix' className='img_banner' src={item.picUrl}/>
+              <Image mode='widthFix' className='img_banner' src={item.url}/>
             </SwiperItem>
           ))
         }

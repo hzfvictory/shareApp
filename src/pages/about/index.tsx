@@ -17,7 +17,7 @@ export default class Index extends Component {
         marginTop: '100px'
       }}
       >
-        <Text className={'about'}>如有侵权，请联系wx: hzfvlp，修正</Text>
+        <Text className={'about'}>如有侵权，请联系wx: hzfvlp 修正</Text>
       </View>
     )
   }

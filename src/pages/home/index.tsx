@@ -3,13 +3,12 @@ import {Component} from "@/bases"
 import {View} from '@tarojs/components'
 import MySwiper from "@/components/MySwiper"
 import Article from "@/components/Article";
-import {banners} from "./config"
-import {getList} from "./service"
-
+import {getList, queryBanner} from "./service"
+import {USERID} from "@/utils/constants"
 import './index.scss'
 
 interface IState {
-  data: any[],
+  banners: any[],
   article: any[]
 }
 
@@ -18,37 +17,36 @@ export default class Index extends Component<IState> {
     navigationBarTitleText: '首页'
   };
   state: IState = {
-    data: [],
+    banners: [],
     article: []
   };
 
   componentDidMount() {
-    this.setState({
-      data: banners,
-
-    });
     this.queryData()
   }
 
   queryData = async () => {
     const result = this.handleResultData(await getList());
+    const {banners} = this.handleResultData(await queryBanner(USERID));
+    result.length = 1;  // 为了应付微信审核，临时添加
+
     this.setState({
       article: result,
-
+      banners
     });
   };
 
   onClickArticle = () => {
-    this.jumpUrl('/pages/detail/index?title=请在后台完善该篇文章')
+    this.jumpUrl('/pages/detail/index?id=5e8ef0c1ef20b17e3096f910')
   };
 
   render() {
-    const {article} = this.state;
+    const {article,banners} = this.state;
 
     return (
       <View>
         <MySwiper
-          banner={this.state.data}
+          banner={banners}
           home
         />
         <View className='content'>
@@ -60,8 +58,8 @@ export default class Index extends Component<IState> {
                   key={item._id}
                   articleId={item._id}
                   title={item.user_name}
-                  thumb='https://ae01.alicdn.com/kf/H429e1354fc1d40f8a762d714b6718aeba.png'
-                  author={item.user_name}
+                  thumb='http://aituwen.qiniudn.com/uBH%2BzN2U0lUeKhyDRF7qUtLpPOg%3D?imageView2/2/w/1280/interlace/1'
+                  author={'小he'}
                   publishTime={item.create_date}
                 />
               )

@@ -43,7 +43,8 @@ export default class Index extends Component<IProps> {
               {/*用户名称*/}
               <View className='at-row at-row__justify--center'>
                 <View className='getUser'>
-                  <AtButton openType='getUserInfo' onGetUserInfo={onClick}>游客</AtButton>
+                  <View className='username'>游客</View>
+                  {/*<AtButton openType='getUserInfo' onGetUserInfo={onClick}>游客</AtButton>*/}
                 </View>
                 {/*<View className='username'>点击登陆</View>*/}
               </View>
