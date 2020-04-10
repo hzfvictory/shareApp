@@ -17,3 +17,24 @@
     color: #222222eb
   }
 }
+
+@media (prefers-color-scheme: dark) {
+  .guide-page {
+    background: #292929;
+    .guide-title {
+      font-size: 28px;
+      color: white
+    }
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .guide-page {
+    background: white;
+    .guide-title {
+      font-size: 28px;
+      color: #222222eb
+    }
+  }
+}
+
