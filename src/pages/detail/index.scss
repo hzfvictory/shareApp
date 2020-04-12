@@ -2,10 +2,10 @@
   width: calc(100vw - 56px);
   box-sizing: border-box;
   padding-top: 16px;
-  padding-bottom: 30px;
   margin: 0 auto;
   overflow: hidden;
   color: #2C3E50;
+  padding-bottom: 50px;
   -webkit-user-select: text !important;
 
 
@@ -13,10 +13,12 @@
     margin: 35Px 0 20Px;
     font-size: 26PX;
   }
+
   a {
     color: #3eaf7c;
     text-decoration: none;
   }
+
   h3 {
     margin: 35Px 0 20Px;
     font-size: 22PX;
@@ -68,4 +70,12 @@
   td {
     text-align: left !important
   }
+
+  .pv_text {
+    margin-top: 10PX;
+    float: right;
+    color: #14c9c9 !important;
+  }
 }
+
+

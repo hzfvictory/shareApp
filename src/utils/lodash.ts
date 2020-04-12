@@ -6,7 +6,6 @@
 
 // 数据统一判断是否 200
 export const handleResultData = (res?: any, cb?: () => {}) => {
-
   if (res.code === 200) {
     cb && cb();
     return res.data;

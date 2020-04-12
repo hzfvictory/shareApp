@@ -1,6 +1,6 @@
 import Taro, {Config} from '@tarojs/taro'
 import {Component} from "@/bases"
-import {View, RichText} from '@tarojs/components'
+import {View, RichText, Text} from '@tarojs/components'
 import AD from "@/components/Guide"
 import {getArticleDetail} from "./service"
 
@@ -9,7 +9,8 @@ import "./index.scss"
 
 interface IState {
   id: string,
-  nodes: string
+  nodes: string,
+  pv: number
 }
 
 export default class Index extends Component<IState> {
@@ -19,7 +20,8 @@ export default class Index extends Component<IState> {
   };
   state: IState = {
     id: "",
-    nodes: ''
+    nodes: '',
+    pv: 0
   };
 
   componentDidMount(): void {
@@ -36,13 +38,14 @@ export default class Index extends Component<IState> {
     const result = this.handleResultData(await getArticleDetail(id));
 
     this.setState({
-      nodes: result[0].body
+      nodes: result[0].body,
+      pv: result[0].pv
     })
   };
 
 
   render() {
-    const {nodes} = this.state;
+    const {nodes, pv} = this.state;
     return (
       <View>
         <AD/>
@@ -50,6 +53,9 @@ export default class Index extends Component<IState> {
           {/*<Empty title={title}/>*/}
           {/*<View dangerouslySetInnerHTML={{__html: nodes}} />*/}
           <RichText nodes={nodes} space='ensp'/>
+          <Text className={'pv_text'}>
+            浏览量：{pv}
+          </Text>
         </View>
       </View>
 

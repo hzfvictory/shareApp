@@ -3,7 +3,7 @@ import {Component} from "@/bases"
 import {View} from '@tarojs/components'
 import MySwiper from "@/components/MySwiper"
 import Article from "@/components/Article";
-import {getList, queryBanner} from "./service"
+import {queryBanner, queryArticleList} from "./service"
 import {USERID} from "@/utils/constants"
 import './index.scss'
 
@@ -26,22 +26,20 @@ export default class Index extends Component<IState> {
   }
 
   queryData = async () => {
-    const result = this.handleResultData(await getList());
+    const result = this.handleResultData(await queryArticleList(USERID));
     const {banners} = this.handleResultData(await queryBanner(USERID));
-    result.length = 1;  // 为了应付微信审核，临时添加
-
     this.setState({
       article: result,
       banners
     });
   };
 
-  onClickArticle = () => {
-    this.jumpUrl('/pages/detail/index?id=5e8ef0c1ef20b17e3096f910')
+  onClickArticle = (_id) => () => {
+    this.jumpUrl('/pages/detail/index?id=' + _id)
   };
 
   render() {
-    const {article,banners} = this.state;
+    const {article, banners} = this.state;
 
     return (
       <View>
@@ -54,12 +52,12 @@ export default class Index extends Component<IState> {
             !!article.length && article.map((item) => {
               return (
                 <Article
-                  onHandleClick={this.onClickArticle}
+                  onHandleClick={this.onClickArticle(item._id)}
                   key={item._id}
                   articleId={item._id}
-                  title={item.user_name}
-                  thumb='http://aituwen.qiniudn.com/uBH%2BzN2U0lUeKhyDRF7qUtLpPOg%3D?imageView2/2/w/1280/interlace/1'
-                  author={'小he'}
+                  title={item.title}
+                  thumb={item.cover_key}
+                  author={item.nickname}
                   publishTime={item.create_date}
                 />
               )
