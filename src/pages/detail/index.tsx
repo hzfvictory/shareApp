@@ -1,6 +1,6 @@
 import Taro, {Config} from '@tarojs/taro'
 import {Component} from "@/bases"
-import {View, RichText, Text} from '@tarojs/components'
+import {View, RichText, Text, Button} from '@tarojs/components'
 import AD from "@/components/Guide"
 import {getArticleDetail} from "./service"
 
@@ -16,7 +16,7 @@ interface IState {
 export default class Index extends Component<IState> {
 
   config: Config = {
-    navigationBarTitleText: '详情页面'
+    navigationBarTitleText: '文章详情'
   };
   state: IState = {
     id: "",
@@ -25,24 +25,40 @@ export default class Index extends Component<IState> {
   };
 
   componentDidMount(): void {
-    const {id} = this.$router.params;
-    this.setState({
-      id
-    }, () => {
+    const {id, title} = this.$router.params;
+    this.setTitle(title);
+
+    this.setState({id}, () => {
       this.queryData()
     })
   }
 
+  onShareAppMessage(res) {
+    const {title, id} = this.$router.params;
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      // console.log(res)
+    }
+    return {
+      title: title,
+      path: `${this.$router.path}?id=${id}&title=${title}`
+    }
+  }
+
   queryData = async () => {
     const {id} = this.state;
-    const result = this.handleResultData(await getArticleDetail(id));
-
+    const {temp_data} = await getArticleDetail(id);
     this.setState({
-      nodes: result[0].body,
-      pv: result[0].pv
+      nodes: temp_data.body,
+      pv: temp_data.pv
     })
   };
 
+  goTop = () => {
+    Taro.pageScrollTo({
+      scrollTop: 0
+    });
+  };
 
   render() {
     const {nodes, pv} = this.state;
@@ -53,12 +69,11 @@ export default class Index extends Component<IState> {
           {/*<Empty title={title}/>*/}
           {/*<View dangerouslySetInnerHTML={{__html: nodes}} />*/}
           <RichText nodes={nodes} space='ensp'/>
-          <Text className={'pv_text'}>
+          <Text className={'pv_text'} onClick={this.goTop}>
             浏览量：{pv}
           </Text>
         </View>
       </View>
-
     )
   }
 }

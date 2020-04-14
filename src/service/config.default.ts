@@ -4,6 +4,9 @@
  * Description:一些配置项,和状态码
  */
 
+// export const DEVURL = "http://localhost:9999";//测试服务器
+// export const PREFIX = "";
+
 export const DEVURL = "https://www.jing999.cn";//测试服务器
 export const PRODUCTURL = "https://www.jing999.cn"; // 生产环境，线上服务器
 export const MOCKHOST = "https://www.easy-mock.com/mock/5d5227e2d981d40171ed9808"; //Easy Mock 模拟接口数据

@@ -7,5 +7,6 @@
 import Taro from "@tarojs/taro";
 
 export const token = (): string => Taro.getStorageSync('token') || '';
+export const userInfo = (): string => Taro.getStorageSync('userInfo') || {};
 
 

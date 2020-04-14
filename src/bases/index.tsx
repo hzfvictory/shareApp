@@ -5,7 +5,7 @@
  */
 import Taro from '@tarojs/taro'
 import {jumpUrl, queryURLParameter, getCurrentPageUrl} from "@/utils/router"
-import {handleResultData} from "@/utils/lodash"
+import {handleResultData, setTitle} from "@/utils/lodash"
 
 interface IProps {
   dispatch: IDispatch;
@@ -17,4 +17,5 @@ export class Component<P = {}, S = {}> extends Taro.Component<P & IProps, S> {
   public queryURLParameter = queryURLParameter;
   public getCurrentPageUrl = getCurrentPageUrl;
   public handleResultData = handleResultData;
+  public setTitle = setTitle;
 }

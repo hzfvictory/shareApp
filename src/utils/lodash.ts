@@ -1,3 +1,5 @@
+import Taro from "@tarojs/taro";
+
 /**
  * Author: hzf;
  * Date: 2020-03-30 16:42;
@@ -11,4 +13,14 @@ export const handleResultData = (res?: any, cb?: () => {}) => {
     return res.data;
   }
   return []
+};
+
+export function setTitle(title: string) {
+  if (process.env.TARO_ENV === 'h5') {
+    this.config.navigationBarTitleText = title;
+  } else {
+    Taro.setNavigationBarTitle({
+      title
+    });
+  }
 };

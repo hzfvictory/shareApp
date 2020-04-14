@@ -14,7 +14,8 @@ interface IState {
 
 export default class Index extends Component<IState> {
   config: Config = {
-    navigationBarTitleText: '首页'
+    navigationBarTitleText: '文章列表页',
+    enablePullDownRefresh: true
   };
   state: IState = {
     article: [],
@@ -23,15 +24,22 @@ export default class Index extends Component<IState> {
   };
 
   componentDidMount() {
-    const {id, value} = this.$router.params;
-    this.config.navigationBarTitleText = value;
-
+    const {id, title} = this.$router.params;
+    this.setTitle(title);
     this.setState({
       c_id: id
     }, () => {
       this.queryData()
     })
   }
+
+  onPullDownRefresh = () => {
+    Taro.vibrateShort();
+    this.queryData()
+  };
+  stopPullDownRefresh = () => {
+    Taro.stopPullDownRefresh();
+  };
 
   queryData = async () => {
     this.setState({
@@ -43,11 +51,13 @@ export default class Index extends Component<IState> {
     this.setState({
       article: result,
       isLoading: false
+    }, () => {
+      this.stopPullDownRefresh()
     });
   };
 
-  onClickArticle = (id: string) => () => {
-    this.jumpUrl('/pages/detail/index?id=' + id)
+  onClickArticle = (item: any) => () => {
+    this.jumpUrl(`/pages/detail/index?id=${item._id}&title=${item.title}`)
   };
 
   render() {
@@ -60,7 +70,7 @@ export default class Index extends Component<IState> {
             article.map((item) => {
               return (
                 <Article
-                  onHandleClick={this.onClickArticle(item._id)}
+                  onHandleClick={this.onClickArticle(item)}
                   key={item._id}
                   articleId={item._id}
                   title={item.title}

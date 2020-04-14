@@ -1,12 +1,14 @@
 import Taro, {Component, Config} from '@tarojs/taro'
 import {View} from '@tarojs/components'
 import UserInfoBar from "@/components/UserInfoBar";
-import {AtList, AtListItem} from "taro-ui"
+import {AtList, AtMessage, AtListItem} from "taro-ui"
 import {jumpUrl} from "@/utils/router";
+import {userInfo} from "@/utils/storage";
+import {weChatLogin} from "./service"
 import './index.scss'
 
 interface IState {
-  state: boolean,
+  isLogin: boolean,
   userInfos: any
 }
 
@@ -19,8 +21,8 @@ export default class Index extends Component<IState, any> {
   constructor(props) {
     super(props);
     this.state = {
-      isLogin: false,
-      userInfos: {}
+      isLogin: JSON.stringify(userInfo()) !== '{}',
+      userInfos: userInfo() || {}
     }
   }
 
@@ -28,21 +30,81 @@ export default class Index extends Component<IState, any> {
     jumpUrl(`/pages/about/index`)
   };
 
-  onClickLogin = () => {
+  onClickLogin = (options) => {
+    if (process.env.TARO_ENV === 'h5') {
+      Taro.atMessage({
+        'message': 'h5暂时不支持 API login',
+        'type': 'error',
+      });
+      return false
+    }
 
+    Taro.login({
+      success: async (res) => {
+        if (res.code) {
+          //发起网络请求
+          const params = {
+            weChatInfo: options.target.userInfo
+          };
+          const {data, token, code, msg} = await weChatLogin(res.code, params);
+
+          if (code === 200) {
+            Taro.setStorage({key: "userInfo", data});
+            token && Taro.setStorage({key: "token", data: token});
+            this.setState({
+              userInfos: data,
+              isLogin: true
+            }, () => {
+              Taro.atMessage({
+                'message': '登录成功',
+                'type': 'success',
+              });
+            });
+          } else {
+            Taro.atMessage({
+              'message': msg,
+              'type': 'error',
+            });
+          }
+        } else {
+          Taro.atMessage({
+            'message': res.errMsg,
+            'type': 'error',
+          });
+        }
+      }
+    })
+  };
+
+  signOut = () => {
+    Taro.showActionSheet({
+      itemList: ["退出登录"]
+    }).then(res => {
+      if (res.tapIndex === 0) {
+        Taro.clearStorage({
+          success: () => {
+            this.setState({
+              userInfos: {},
+              isLogin: false
+            })
+          }
+        });
+      }
+    })
   };
 
   render() {
     const {isLogin, userInfos} = this.state;
-
     return (
       <View className='mine-index'>
+        <AtMessage/>
         <UserInfoBar
           isLogin={isLogin}
-          onClick={this.onClickLogin}
-          userInfo={userInfos}
+          // @ts-ignore
+          onHandleLogin={this.onClickLogin}
+          onSignOut={this.signOut}
+          userInfo={userInfos.weChatInfo}
         />
-
         {/*<View className='about-reader'>*/}
         {/*  <AtList>*/}
         {/*    <AtListItem onClick={this.onClickAboutPage} title='浏览记录' arrow='right'*/}

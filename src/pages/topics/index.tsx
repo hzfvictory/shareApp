@@ -13,7 +13,8 @@ interface IState {
 export default class Index extends Component<IState> {
 
   config: Config = {
-    navigationBarTitleText: '专题'
+    navigationBarTitleText: '专题',
+    enablePullDownRefresh: true
   };
 
   state = {
@@ -23,6 +24,14 @@ export default class Index extends Component<IState> {
   componentDidMount(): void {
     this.queryList()
   }
+
+  onPullDownRefresh = () => {
+    Taro.vibrateShort();
+    this.queryList()
+  };
+  stopPullDownRefresh = () => {
+    Taro.stopPullDownRefresh();
+  };
 
   queryList = async () => {
     const result = this.handleResultData(await queryArticleList(USERID));
@@ -38,15 +47,15 @@ export default class Index extends Component<IState> {
       draftData.push(obj)
     });
 
-    console.log(draftData);
-
     this.setState({
       dataList: draftData
+    }, () => {
+      this.stopPullDownRefresh()
     })
   };
 
   handlerClick = (item) => {
-    jumpUrl(`/pages/article-list/index?id=${item._id}&value=${item.name}`)
+    jumpUrl(`/pages/article-list/index?id=${item._id}&title=${item.name}`)
   };
 
   render() {

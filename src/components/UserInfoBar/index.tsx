@@ -6,13 +6,15 @@ import './index.scss'
 interface IProps {
   isLogin?: boolean,
   userInfo: any,
-  onClick?: () => void
+  onHandleLogin?: () => void,
+  onSignOut?: () => void
 }
 
 export default class Index extends Component<IProps> {
-  render() {
-    const {isLogin, onClick, userInfo} = this.props;
 
+
+  render() {
+    const {isLogin, onHandleLogin, userInfo, onSignOut} = this.props;
     return (
       <View className='user-info'>
         {/*用户头像*/}
@@ -20,7 +22,7 @@ export default class Index extends Component<IProps> {
           isLogin ?
             <View>
               <View className='at-row at-row__justify--center'>
-                <View className='user-pic'>
+                <View className='user-pic' onClick={onSignOut}>
                   <Image className='user-avi-pic' src={userInfo.avatarUrl}/>
                 </View>
               </View>
@@ -43,10 +45,13 @@ export default class Index extends Component<IProps> {
               {/*用户名称*/}
               <View className='at-row at-row__justify--center'>
                 <View className='getUser'>
-                  <View className='username'>游客</View>
-                  {/*<AtButton openType='getUserInfo' onGetUserInfo={onClick}>游客</AtButton>*/}
+                  {
+                    process.env.TARO_ENV === 'h5' ?
+                      <View className='username' onClick={onHandleLogin}>点击登陆</View> :
+                      <AtButton className={'username'} openType='getUserInfo'
+                                onGetUserInfo={onHandleLogin}>点击登陆</AtButton>
+                  }
                 </View>
-                {/*<View className='username'>点击登陆</View>*/}
               </View>
             </View>
         }

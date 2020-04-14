@@ -4,5 +4,16 @@ module.exports = {
   },
   defineConstants: {},
   mini: {},
-  h5: {}
-}
+  h5: {
+    devServer: {
+      "proxy": {
+        "/api": {
+          "target": "http://localhost:9999/",
+          "changeOrigin": true,
+          "secure": false,
+          "pathRewrite": {"^/api": ""}
+        }
+      }
+    }
+  }
+};
