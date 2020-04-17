@@ -1,6 +1,6 @@
 import Taro, {Config} from '@tarojs/taro'
 import {Component} from "@/bases"
-import {View,Image} from '@tarojs/components'
+import {View} from '@tarojs/components'
 import MySwiper from "@/components/MySwiper"
 import Article from "@/components/Article";
 import {queryBanner, queryArticleList} from "./service"
@@ -48,13 +48,16 @@ export default class Index extends Component<IState> {
   };
 
   queryData = async () => {
+    Taro.showNavigationBarLoading();
+
     const result = this.handleResultData(await queryArticleList(USERID));
     const {banners} = this.handleResultData(await queryBanner(USERID));
     this.setState({
       article: result,
       banners
     }, () => {
-      this.stopPullDownRefresh()
+      this.stopPullDownRefresh();
+      Taro.hideNavigationBarLoading();
     });
   };
 

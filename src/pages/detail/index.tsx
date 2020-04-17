@@ -17,7 +17,8 @@ interface IState {
 export default class Index extends Component<IState> {
 
   config: Config = {
-    navigationBarTitleText: '文章详情'
+    navigationBarTitleText: '文章详情',
+    enablePullDownRefresh: true
   };
   state: IState = {
     id: "",
@@ -46,13 +47,21 @@ export default class Index extends Component<IState> {
     }
   }
 
+  onPullDownRefresh = () => {
+    Taro.vibrateShort();
+    this.queryData()
+  };
   // 调取接口
   queryData = async () => {
+    Taro.showNavigationBarLoading();
     const {id} = this.state;
     const {temp_data} = await getArticleDetail(id);
     this.setState({
       nodes: temp_data.body,
       pv: temp_data.pv
+    }, () => {
+      Taro.stopPullDownRefresh();
+      Taro.hideNavigationBarLoading();
     })
   };
 
@@ -62,8 +71,6 @@ export default class Index extends Component<IState> {
     });
   };
   imgClick = (src) => {
-    console.log(src);
-
     Taro.previewImage({urls: [src]}).then(() => {
     })
   };
