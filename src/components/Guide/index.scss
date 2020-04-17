@@ -1,11 +1,14 @@
 .guide-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: calc(100vw - 60px);
   padding: 15px 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.1);
-  background-color: #fff;
-  margin-bottom: 25px;
+  z-index: 1000;
 
   .qcore {
     width: 100px;
@@ -14,13 +17,14 @@
 
   .guide-title {
     font-size: 28px;
-    color: #222222eb
+    color: #222222eb;
   }
 }
 
 @media (prefers-color-scheme: dark) {
   .guide-page {
-    background: #292929;
+    background: #232323;
+
     .guide-title {
       font-size: 28px;
       color: white
@@ -31,6 +35,7 @@
 @media (prefers-color-scheme: light) {
   .guide-page {
     background: white;
+
     .guide-title {
       font-size: 28px;
       color: #222222eb

@@ -1,3 +1,22 @@
 .content {
   margin-top: 40px;
 }
+
+.barBox {
+  width: 100%;
+  padding: 15px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+}
+
+.searchBtn {
+  display: inline-block;
+}
+
+.searchBtn image{
+  width: 129px;
+  height: 46px;
+  padding: 5px 10px 0 15px;
+}

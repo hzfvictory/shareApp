@@ -1,11 +1,12 @@
 import Taro, {Config} from '@tarojs/taro'
 import {Component} from "@/bases"
-import {View, RichText, Text, Button} from '@tarojs/components'
+import {View, Text} from '@tarojs/components'
 import AD from "@/components/Guide"
+import TaroParser from 'taro-parse'
+
 import {getArticleDetail} from "./service"
 
 import "./index.scss"
-
 
 interface IState {
   id: string,
@@ -45,6 +46,7 @@ export default class Index extends Component<IState> {
     }
   }
 
+  // 调取接口
   queryData = async () => {
     const {id} = this.state;
     const {temp_data} = await getArticleDetail(id);
@@ -59,21 +61,43 @@ export default class Index extends Component<IState> {
       scrollTop: 0
     });
   };
+  imgClick = (src) => {
+    console.log(src);
+
+    Taro.previewImage({urls: [src]}).then(() => {
+    })
+  };
+
+  linkClick = (href) => {
+    Taro.setClipboardData({data: href}).then(() => {
+      Taro.showToast({title: '链接已复制'}).then(() => {
+      })
+    })
+
+  };
 
   render() {
     const {nodes, pv} = this.state;
     return (
       <View>
         <AD/>
-        <View className={'rich-text'}>
-          {/*<Empty title={title}/>*/}
-          {/*<View dangerouslySetInnerHTML={{__html: nodes}} />*/}
-          <RichText nodes={nodes} space='ensp'/>
+        <View className={'parse-content'}>
+          <TaroParser
+            type='html'
+            theme='light'
+            content={nodes}
+            onImgClick={this.imgClick}
+            onLinkClick={this.linkClick}
+          />
           <Text className={'pv_text'} onClick={this.goTop}>
             浏览量：{pv}
           </Text>
         </View>
+
       </View>
     )
   }
 }
+
+
+

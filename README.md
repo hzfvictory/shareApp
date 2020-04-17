@@ -35,4 +35,21 @@ yarn dev:weapp
 
 ## 适配进度
 
-刚起航  - 待测试
+### [towxml](https://github.com/sbfkcel/towxml) && [wxParse](https://github.com/icindy/wxParse)
+
+#### wxParse
+
+停止维护，不支持表格展示，页面效果一般般
+
+```javascript
+// 在微信端，需要先拿到数据才能执行wxParse组件，否则不能展示
+{
+nodes && <ParseComponent
+  article={nodes}
+/>
+}
+```
+
+#### towxml
+
+兼容性比wxParse高，页面展示效果比较好，占内存大

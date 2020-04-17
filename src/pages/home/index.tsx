@@ -1,6 +1,6 @@
 import Taro, {Config} from '@tarojs/taro'
 import {Component} from "@/bases"
-import {View} from '@tarojs/components'
+import {View,Image} from '@tarojs/components'
 import MySwiper from "@/components/MySwiper"
 import Article from "@/components/Article";
 import {queryBanner, queryArticleList} from "./service"
@@ -67,6 +67,11 @@ export default class Index extends Component<IState> {
 
     return (
       <View>
+        {/*<View className='barBox' style='background:{{bac}}'>*/}
+        {/*  <View className='searchBtn'>*/}
+        {/*    <Image src="https://ae01.alicdn.com/kf/H743d675589214abe9bc2266663ab9d625.jpeg"/>*/}
+        {/*  </View>*/}
+        {/*</View>*/}
         <MySwiper
           banner={banners}
           home
