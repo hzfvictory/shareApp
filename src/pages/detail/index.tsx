@@ -90,7 +90,7 @@ export default class Index extends Component<IState> {
             onLinkClick={this.linkClick}
           />
           <Text className={'pv_text'} onClick={this.goTop}>
-            浏览量：{pv}
+            ↟ 浏览量 ：{pv}
           </Text>
         </View>
 

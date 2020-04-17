@@ -15,7 +15,7 @@ interface IState {
 export default class Index extends Component<IState> {
   config: Config = {
     navigationBarTitleText: '首页',
-    navigationStyle: "custom",
+    // navigationStyle: "custom",
     enablePullDownRefresh: true
   };
   state: IState = {

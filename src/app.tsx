@@ -1,6 +1,7 @@
 import Taro, {Component, Config} from '@tarojs/taro'
 import {Provider} from '@tarojs/redux';
 import store from './utils/dva';
+
 import './app.scss'
 // 如果需要在 h5 环境中开启 React Devtools
 // 取消以下注释：
@@ -9,9 +10,6 @@ import './app.scss'
 // }
 
 class App extends Component {
-
-  componentDidMount() {
-  }
 
   componentDidShow() {
   }
@@ -37,6 +35,7 @@ class App extends Component {
       'pages/about/index',
       'pages/detail/index',
       'pages/article-list/index',
+      'pages/create-article/index',
     ],
     subPackages: [
       {

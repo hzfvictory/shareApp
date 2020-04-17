@@ -1,12 +1,13 @@
+// @ts-nocheck
 import Taro, {Component} from '@tarojs/taro'
 import {View} from '@tarojs/components'
-// @ts-ignore
 import WxParse from "./components/wxParse"
 import "./index.scss"
 
 interface IProps {
   article: string
 }
+
 
 export default class Index extends Component<IProps> {
   static defaultProps = {
@@ -38,6 +39,7 @@ export default class Index extends Component<IProps> {
     return (
       <View>
         <import src='./components/wxParse.wxml'/>
+        {/* eslint-disable-next-line react/forbid-elements */}
         <template is='wxParse' data='{{wxParseData:article.nodes}}'/>
       </View>
     )

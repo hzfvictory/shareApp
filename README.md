@@ -52,4 +52,4 @@ nodes && <ParseComponent
 
 #### towxml
 
-兼容性比wxParse高，页面展示效果比较好，占内存大
+兼容性比wxParse高，页面展示效果比较好，比较占内存

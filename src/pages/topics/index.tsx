@@ -5,6 +5,8 @@ import {AtGrid} from "taro-ui"
 import {jumpUrl} from "@/utils/router"
 import {queryArticleList} from "./service"
 import {USERID} from "@/utils/constants"
+import "./index.scss"
+
 
 interface IState {
   dataList: any[]

@@ -1,6 +1,12 @@
 @import "assets/css/mixin";
 @import "~taro-ui/dist/style/index.scss";
 
+
+// 微信端
+page {
+  font-family: "STHeitiTC-Light", "Microsoft YaHei Light", "Hiragino Sans GB", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
 // h5端
 body {
   font-family: "STHeitiTC-Light", "Microsoft YaHei Light", "Hiragino Sans GB", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !important;
@@ -8,7 +14,3 @@ body {
   //-webkit-filter: grayscale(1);
 }
 
-// 微信端
-page {
-  font-family: "STHeitiTC-Light", "Microsoft YaHei Light", "Hiragino Sans GB", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-}
