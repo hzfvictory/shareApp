@@ -3,7 +3,7 @@ import {View} from '@tarojs/components'
 import UserInfoBar from "@/components/UserInfoBar";
 import {AtList, AtMessage, AtListItem} from "taro-ui"
 import {jumpUrl} from "@/utils/router";
-import {userInfo} from "@/utils/storage";
+import {userInfo, token} from "@/utils/storage";
 import {weChatLogin} from "./service"
 import './index.scss'
 
@@ -115,7 +115,7 @@ export default class Index extends Component<IState, any> {
         <View className='about-reader'>
           <AtList>
             {
-              process.env.TARO_ENV === 'weapp' &&
+              process.env.TARO_ENV === 'weapp' && token() &&
               <AtListItem onClick={this.onCreateArticle} title='添加文章' arrow='right'
                           iconInfo={{size: 24, color: '#409EFF', value: 'add'}}
               />

@@ -51,6 +51,10 @@ export default class Index extends Component<IState> {
     Taro.vibrateShort();
     this.queryData()
   };
+  stopPullDownRefresh = () => {
+    Taro.stopPullDownRefresh();
+  };
+
   // 调取接口
   queryData = async () => {
     Taro.showNavigationBarLoading();
@@ -60,7 +64,7 @@ export default class Index extends Component<IState> {
       nodes: temp_data.body,
       pv: temp_data.pv
     }, () => {
-      Taro.stopPullDownRefresh();
+      this.stopPullDownRefresh();
       Taro.hideNavigationBarLoading();
     })
   };
@@ -70,8 +74,14 @@ export default class Index extends Component<IState> {
       scrollTop: 0
     });
   };
-  imgClick = (src) => {
-    Taro.previewImage({urls: [src]}).then(() => {
+
+  // imgClick = (src) => {
+  //   Taro.previewImage({urls: [src]}).then(() => {
+  //   })
+  // };
+
+  imgClick = (src, imgList) => {
+    Taro.previewImage({urls: imgList, current: src}).then(() => {
     })
   };
 
