@@ -16,6 +16,7 @@ export const handleResultData = (res?: any, cb?: () => {}) => {
 };
 
 export function setTitle(title: string) {
+  title=decodeURIComponent(title);
   if (process.env.TARO_ENV === 'h5') {
     this.config.navigationBarTitleText = title;
   } else {

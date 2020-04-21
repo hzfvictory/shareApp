@@ -1,0 +1,55 @@
+@import "../../assets/css/mixin";
+
+$nav_line: #fff;
+
+.navContent {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: second(66px);
+  z-index: 999;
+  background-color: #fff;
+  color: $bg-color-base;
+
+  .navBox {
+    position: absolute;
+    bottom: second(10px);
+    left: 0;
+    right: 0;
+    z-index: 999;
+    height: second(46px);
+    @include fj(center);
+    align-items: flex-end;
+
+    .backGo {
+      position: absolute;
+      background-color: $nav_line;
+      //border: 1PX solid rgba(168, 168, 168, 0.17);
+      //border-radius: 20PX;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+
+      .navLine {
+        width: 1PX;
+        //background-color: #9a9abb;
+        background-color: #fff;
+      }
+
+      .btnClick {
+        width: 49%;
+        text-align: left;
+      }
+    }
+
+    .navTitle {
+      font-weight: bold;
+      font-size: 16PX;
+      color: #2D2F3A;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}

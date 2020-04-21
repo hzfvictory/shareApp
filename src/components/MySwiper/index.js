@@ -1,6 +1,7 @@
 import Taro, {Component} from '@tarojs/taro';
 import {Swiper, SwiperItem, Image} from '@tarojs/components';
 import PropTypes from 'prop-types';
+import {jumpUrl} from "../../utils/router";
 
 import './index.scss';
 
@@ -12,11 +13,17 @@ export default class Index extends Component {
   };
   static defaultProps = {
     banner: [],
-    home: false,
+    home: true,
+  };
+
+  // 点击banner跳转
+  handleJumpUrl = (url) => () => {
+    if (!url) return;
+    jumpUrl(url)
   };
 
   render() {
-    const {banner, home} = this.props;
+    const {banner, home, jump} = this.props;
     return (
       <Swiper
         className={!home ? 'swiper-container' : 'swiper'}
@@ -30,7 +37,9 @@ export default class Index extends Component {
         {
           banner.map((item, index) => (
             <SwiperItem key={index}>
-              <Image mode='widthFix' className='img_banner' src={item.url}/>
+              <Image onClick={this.handleJumpUrl(item[jump])} mode='widthFix' className='img_banner'
+                     src={item.url}
+              />
             </SwiperItem>
           ))
         }

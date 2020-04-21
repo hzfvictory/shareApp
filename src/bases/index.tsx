@@ -18,4 +18,10 @@ export class Component<P = {}, S = {}> extends Taro.Component<P & IProps, S> {
   public getCurrentPageUrl = getCurrentPageUrl;
   public handleResultData = handleResultData;
   public setTitle = setTitle;
+  public showNavigationBarLoading = () => {
+    process.env.TARO_ENV !== 'h5' && Taro.showNavigationBarLoading()
+  };
+  public hideNavigationBarLoading = () => {
+    process.env.TARO_ENV !== 'h5' && Taro.hideNavigationBarLoading()
+  };
 }

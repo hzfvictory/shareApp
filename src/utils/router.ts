@@ -21,9 +21,9 @@ export const jumpUrl = (url: string, options = {} as IOptions) => {
   let method = options.method || 'navigateTo';
 
   const tabList = [
-    'pages/home/home',
-    'pages/mine/home',
-    'pages/topics/home'
+    'pages/home/index',
+    'pages/mine/index',
+    'pages/topics/index'
   ];
 
   if (url) {

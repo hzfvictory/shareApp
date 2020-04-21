@@ -3,6 +3,9 @@ import {Provider} from '@tarojs/redux';
 import store from './utils/dva';
 
 import './app.scss'
+
+import './assets/css/font_1381084_de07784ybyv/iconfont.css';
+
 // 如果需要在 h5 环境中开启 React Devtools
 // 取消以下注释：
 // if (process.env.NODE_ENV !== 'production' && process.env.TARO_ENV === 'h5')  {
@@ -37,14 +40,14 @@ class App extends Component {
       'pages/article-list/index',
       'pages/create-article/index',
     ],
-    subPackages: [
-      {
-        "root": "dev",
-        "pages": [
-          "index",
-        ],
-      },
-    ], // 分包
+    // subPackages: [
+    //   {
+    //     "root": "develop",
+    //     "pages": [
+    //       "index",
+    //     ],
+    //   },
+    // ], // 分包
     window: {
       backgroundTextStyle: 'dark',
       navigationBarBackgroundColor: '#fff',

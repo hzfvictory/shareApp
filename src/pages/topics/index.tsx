@@ -36,7 +36,7 @@ export default class Index extends Component<IState> {
   };
 
   queryList = async () => {
-    Taro.showNavigationBarLoading();
+    this.showNavigationBarLoading();
     const result = this.handleResultData(await queryArticleList(USERID));
     const draftData = [];
     result.map((item) => {
@@ -54,7 +54,7 @@ export default class Index extends Component<IState> {
       dataList: draftData
     }, () => {
       this.stopPullDownRefresh();
-      Taro.hideNavigationBarLoading();
+      this.hideNavigationBarLoading();
     })
   };
 

@@ -7,15 +7,64 @@
   padding-bottom: 150px;
   margin: 0 auto;
 
-  .pv_text {
-    padding: 40px;
-    font-size: 14PX;
-    word-wrap: break-word;
-    word-break: break-all;
-    float: right;
-    margin-right: 30px;
-    color: #14c9c9 !important;
+  .header-title {
+    padding: 0 30px;
+    font-size: 28PX;
+    font-weight: 500;
   }
+
+  .author-info {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    padding: 0 30px;
+    font-size: 12PX;
+    color: #929292;
+
+    .pv-text {
+      margin-left: 10px;
+    }
+
+    .date {
+      margin-left: 8px;
+    }
+  }
+
+  .go-top {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+
+    width: 40Px;
+    height: 40Px;
+    overflow: hidden;
+    color: #fff;
+    text-align: center;
+    background-color: rgba(0, 0, 0, .45);
+    border-radius: 50%;
+    line-height: 40Px;
+    //box-shadow: 3Px 2Px 4Px #ccc;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 200ms;
+    font-size: 20Px;
+  }
+
+  .go-top-block {
+    opacity: 1;
+  }
+
+  .at-icon-sketch {
+    background: linear-gradient(to bottom, #fcb045, #fd1d1d, #833ab4);
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    text-fill-color: transparent;
+  }
+
+  .taro-img__mode-scaletofill, image {
+    border-radius: 3Px;
+  }
+
 }
 
 .h2w-light .h2w__blockquote {

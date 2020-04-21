@@ -42,7 +42,7 @@ export default class Index extends Component<IState> {
   };
 
   queryData = async () => {
-    Taro.showNavigationBarLoading();
+    this.showNavigationBarLoading();
     this.setState({
       isLoading: true
     });
@@ -54,7 +54,7 @@ export default class Index extends Component<IState> {
       isLoading: false
     }, () => {
       this.stopPullDownRefresh();
-      Taro.hideNavigationBarLoading();
+      this.hideNavigationBarLoading();
     });
   };
 

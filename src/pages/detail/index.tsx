@@ -1,7 +1,9 @@
 import Taro, {Config} from '@tarojs/taro'
 import {Component} from "@/bases"
 import {View, Text} from '@tarojs/components'
+import {AtIcon} from 'taro-ui'
 import AD from "@/components/Guide"
+import NavBar from "@/components/NavBar"
 import TaroParser from 'taro-parse'
 
 import {getArticleDetail} from "./service"
@@ -11,26 +13,31 @@ import "./index.scss"
 interface IState {
   id: string,
   nodes: string,
-  pv: number
+  data: any,
+  show: boolean,
+  title: string
 }
 
 export default class Index extends Component<IState> {
 
   config: Config = {
     navigationBarTitleText: '文章详情',
-    enablePullDownRefresh: true
+    enablePullDownRefresh: false,
+    navigationStyle: "custom",
   };
+
   state: IState = {
     id: "",
+    title: '',
     nodes: '',
-    pv: 0
+    data: {},
+    show: false
   };
 
   componentDidMount(): void {
     const {id, title} = this.$router.params;
-    this.setTitle(title);
 
-    this.setState({id}, () => {
+    this.setState({id, title}, () => {
       this.queryData()
     })
   }
@@ -47,28 +54,36 @@ export default class Index extends Component<IState> {
     }
   }
 
+  onPageScroll(res) {
+    this.handleTop(res)
+  }
+
+  handleTop = (res) => {
+    if (res.scrollTop > Taro.getSystemInfoSync().windowWidth + 100 && !this.state.show) {
+      this.setState({
+        show: true
+      })
+    }
+    if (res.scrollTop === 0 && this.state.show) {
+      this.setState({
+        show: false
+      })
+    }
+  };
+
   onPullDownRefresh = () => {
     Taro.vibrateShort();
     this.queryData()
   };
-  stopPullDownRefresh = () => {
-    Taro.stopPullDownRefresh();
-  };
-
   // 调取接口
   queryData = async () => {
-    Taro.showNavigationBarLoading();
     const {id} = this.state;
-    const {temp_data} = await getArticleDetail(id);
+    const {data} = await getArticleDetail(id);
     this.setState({
-      nodes: temp_data.body,
-      pv: temp_data.pv
-    }, () => {
-      this.stopPullDownRefresh();
-      Taro.hideNavigationBarLoading();
+      nodes: data.body,
+      data
     })
   };
-
   goTop = () => {
     Taro.pageScrollTo({
       scrollTop: 0
@@ -94,23 +109,35 @@ export default class Index extends Component<IState> {
   };
 
   render() {
-    const {nodes, pv} = this.state;
+    const {nodes, data, show, title} = this.state;
     return (
       <View>
         <AD/>
+        <NavBar title={title}/>
         <View className={'parse-content'}>
+          <View>
+            <Text className={"header-title"}>
+              {data.title}
+            </Text>
+            <View className={'author-info'}>
+              <AtIcon value='sketch' size='14' color=''/>
+              <Text className={'pv-text'}>{data.pv}</Text>
+              <Text className={'date'}>  {data.create_date}</Text>
+            </View>
+          </View>
+
           <TaroParser
-            type='html'
+            // type='html'
+            type={data.type}
             theme='light'
             content={nodes}
             onImgClick={this.imgClick}
             onLinkClick={this.linkClick}
           />
-          <Text className={'pv_text'} onClick={this.goTop}>
-            ↟ 浏览量 ：{pv}
+          <Text className={`go-top , ${show ? "go-top-block" : ""}`} onClick={this.goTop}>
+            ↟
           </Text>
         </View>
-
       </View>
     )
   }

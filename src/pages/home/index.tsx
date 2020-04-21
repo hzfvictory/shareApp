@@ -27,6 +27,11 @@ export default class Index extends Component<IState> {
     this.queryData()
   }
 
+  componentDidHide(): void {
+    let pages = Taro.getCurrentPages();
+    console.log(pages);
+  }
+
   onShareAppMessage(res) {
     if (res.from === 'button') {
       // 来自页面内转发按钮
@@ -48,7 +53,7 @@ export default class Index extends Component<IState> {
   };
 
   queryData = async () => {
-    Taro.showNavigationBarLoading();
+    this.showNavigationBarLoading();
 
     const result = this.handleResultData(await queryArticleList(USERID));
     const {banners} = this.handleResultData(await queryBanner(USERID));
@@ -57,7 +62,7 @@ export default class Index extends Component<IState> {
       banners
     }, () => {
       this.stopPullDownRefresh();
-      Taro.hideNavigationBarLoading();
+      this.hideNavigationBarLoading();
     });
   };
 
@@ -77,7 +82,7 @@ export default class Index extends Component<IState> {
         {/*</View>*/}
         <MySwiper
           banner={banners}
-          home
+          jump={'jump_url'}
         />
         <View className='content'>
           {
