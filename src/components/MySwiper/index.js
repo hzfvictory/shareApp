@@ -9,13 +9,10 @@ export default class Index extends Component {
 
   static propTypes = {
     banner: PropTypes.array,
-    home: PropTypes.bool,
   };
   static defaultProps = {
     banner: [],
-    home: true,
   };
-
   // 点击banner跳转
   handleJumpUrl = (url) => () => {
     if (!url) return;
@@ -23,10 +20,13 @@ export default class Index extends Component {
   };
 
   render() {
-    const {banner, home, jump} = this.props;
+    const {banner, jump, stys} = this.props;
+
+
     return (
       <Swiper
-        className={!home ? 'swiper-container' : 'swiper'}
+        className={'swiper-container'}
+        style={stys}
         indicatorDots
         indicatorColor='#999'
         indicatorActiveColor='#bf708f'

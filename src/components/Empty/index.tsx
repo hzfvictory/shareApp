@@ -12,7 +12,7 @@ const Index = (props: IProps) => {
   const {icon, title} = props;
   return (
     <View className='empty'>
-      <Image className='icon' src={icon ? icon : 'https://ae01.alicdn.com/kf/Hfb6c81e22ecb4740be5e1c9c7dbad13fO.jpg'}/>
+      <Image className='icon' src={icon ? icon : 'https://pic.rmb.bdstatic.com/3177b658259c49b9f456b68a91bf4602.jpeg'}/>
       {title && <View className='title'>{title}</View>}
       <View className='info'>{this.props.children}</View>
     </View>

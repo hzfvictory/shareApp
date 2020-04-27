@@ -115,7 +115,7 @@ export default class Index extends Component<IState> {
         <AD/>
         <NavBar title={title}/>
         <View className={'parse-content'}>
-          <View>
+          <View className={'header-padding'}>
             <Text className={"header-title"}>
               {data.title}
             </Text>

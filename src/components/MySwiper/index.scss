@@ -1,18 +1,13 @@
-$b-h: 410px;
-
-.swiper-container {
-  width: 100%;
-  min-height: $b-h;
-  height: 100%;
-}
-
-.swiper {
+$b-h: 210Px;
+.swiper-container  {
   width: 100vw;
   height: $b-h;
+  margin: 0 auto;
 
   image,
   img {
     height: $b-h !important;
+    //border-radius: 10Px;
   }
 
   .img_banner {

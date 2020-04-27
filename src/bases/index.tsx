@@ -24,4 +24,10 @@ export class Component<P = {}, S = {}> extends Taro.Component<P & IProps, S> {
   public hideNavigationBarLoading = () => {
     process.env.TARO_ENV !== 'h5' && Taro.hideNavigationBarLoading()
   };
+  public getMenuButtonBoundingClientRect = (): Taro.getMenuButtonBoundingClientRect.Rect => {
+    // @ts-ignore
+    if (process.env.TARO_ENV === 'h5') return {};
+
+    return Taro.getMenuButtonBoundingClientRect();
+  }
 }

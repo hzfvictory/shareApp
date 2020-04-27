@@ -1,35 +1,44 @@
 import Taro, {Config} from '@tarojs/taro'
 import {Component} from "@/bases"
-import {View} from '@tarojs/components'
+import {View, Image} from '@tarojs/components'
 import MySwiper from "@/components/MySwiper"
 import Article from "@/components/Article";
 import {queryBanner, queryArticleList} from "./service"
 import {USERID} from "@/utils/constants"
+import searchBar from "@/assets/img/searchBar.png"
 import './index.scss'
 
 interface IState {
   banners: any[],
-  article: any[]
+  article: any[],
+  batTop: boolean,
+  barHeight: number,
 }
 
 export default class Index extends Component<IState> {
   config: Config = {
     navigationBarTitleText: '首页',
-    // navigationStyle: "custom",
+    navigationStyle: "custom",
     enablePullDownRefresh: true
   };
   state: IState = {
     banners: [],
-    article: []
+    article: [],
+    batTop: false,
+    barHeight: 0
   };
 
   componentDidMount() {
-    this.queryData()
-  }
+    // 获取状态栏的高度
+    Taro.getSystemInfo({
+      success: res => {
 
-  componentDidHide(): void {
-    let pages = Taro.getCurrentPages();
-    console.log(pages);
+        this.setState({
+          barHeight: res.statusBarHeight
+        });
+      }
+    });
+    this.queryData()
   }
 
   onShareAppMessage(res) {
@@ -43,7 +52,23 @@ export default class Index extends Component<IState> {
     }
   }
 
+  onPageScroll(res) {
+    if (res.scrollTop > 100) {
+      this.setState({
+        batTop: true
+      })
+    }
+    if (res.scrollTop === 0 && this.state.batTop) {
+      this.setState({
+        batTop: false
+      })
+    }
+  }
+
   onPullDownRefresh = () => {
+    this.setState({
+      batTop: false
+    });
     Taro.vibrateShort();
     this.queryData()
   };
@@ -70,21 +95,45 @@ export default class Index extends Component<IState> {
     this.jumpUrl(`/pages/detail/index?id=${item._id}&title=${item.title}`)
   };
 
+  jumpSearch = () => {
+    this.jumpUrl('/pages/search-list/index')
+  };
+
   render() {
-    const {article, banners} = this.state;
+    const {article, banners, batTop, barHeight} = this.state;
+    const {height: boundHeight, top} = this.getMenuButtonBoundingClientRect();
+
+    const contentWeapp = {
+      paddingTop: process.env.TARO_ENV !== 'h5' ? 210 - 100 + 10 + 10 + 'px' : '20px'
+    };
+
 
     return (
       <View>
-        {/*<View className='barBox' style='background:{{bac}}'>*/}
-        {/*  <View className='searchBtn'>*/}
-        {/*    <Image src="https://ae01.alicdn.com/kf/H743d675589214abe9bc2266663ab9d625.jpeg"/>*/}
-        {/*  </View>*/}
-        {/*</View>*/}
-        <MySwiper
-          banner={banners}
-          jump={'jump_url'}
-        />
-        <View className='content'>
+        <View className='barBox' style={{background: batTop ? "#fafafa" : 'transparent'}}>
+          <View className='searchBtn' style={{paddingTop: barHeight + 'px'}} onClick={this.jumpSearch}>
+            <Image className={'searchBar'} src={searchBar}/>
+          </View>
+        </View>
+
+        {
+          process.env.TARO_ENV === 'h5' ?
+            <MySwiper
+              banner={banners}
+              jump={'jump_url'}
+            /> :
+            <View className={'filter-blur'}
+                  style={{paddingTop: boundHeight + top + 10 + 'px', height: boundHeight + top + 100 + 'px'}}
+            >
+              <MySwiper
+                banner={banners}
+                jump={'jump_url'}
+                stys={{width: 'calc(100vw - 20px)'}}
+              />
+            </View>
+        }
+
+        <View className='content' style={contentWeapp}>
           {
             !!article.length && article.map((item) => {
               return (

@@ -1,0 +1,65 @@
+{
+  "id": "1381084",
+  "name": "weapp",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "834635",
+      "name": "search",
+      "font_class": "search",
+      "unicode": "e636",
+      "unicode_decimal": 58934
+    },
+    {
+      "icon_id": "6360760",
+      "name": "search",
+      "font_class": "search1",
+      "unicode": "e661",
+      "unicode_decimal": 58977
+    },
+    {
+      "icon_id": "938476",
+      "name": "left",
+      "font_class": "left",
+      "unicode": "e617",
+      "unicode_decimal": 58903
+    },
+    {
+      "icon_id": "3046320",
+      "name": "left",
+      "font_class": "left1",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "12004990",
+      "name": "Left_curved",
+      "font_class": "Left_curved",
+      "unicode": "eaaf",
+      "unicode_decimal": 60079
+    },
+    {
+      "icon_id": "88082",
+      "name": "set",
+      "font_class": "set",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "1471615",
+      "name": "home",
+      "font_class": "home3",
+      "unicode": "e62a",
+      "unicode_decimal": 58922
+    },
+    {
+      "icon_id": "2987227",
+      "name": "home",
+      "font_class": "home4",
+      "unicode": "e64e",
+      "unicode_decimal": 58958
+    }
+  ]
+}

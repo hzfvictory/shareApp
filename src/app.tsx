@@ -4,7 +4,7 @@ import store from './utils/dva';
 
 import './app.scss'
 
-import './assets/css/font_1381084_de07784ybyv/iconfont.css';
+import './assets/css/font_1381084_yx5rdqvdr7g/iconfont.css';
 
 // 如果需要在 h5 环境中开启 React Devtools
 // 取消以下注释：
@@ -38,6 +38,7 @@ class App extends Component {
       'pages/about/index',
       'pages/detail/index',
       'pages/article-list/index',
+      'pages/search-list/index',
       'pages/create-article/index',
     ],
     // subPackages: [
@@ -51,14 +52,15 @@ class App extends Component {
     window: {
       backgroundTextStyle: 'dark',
       navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: 'JSNotes',
-      navigationBarTextStyle: 'black'
+      navigationBarTitleText: '写实吧',
+      navigationBarTextStyle: 'black',
     },
     tabBar: {
       color: '#333',
       selectedColor: '#333',
       backgroundColor: '#fff',
-      borderStyle: 'white',
+      borderStyle: 'black',
+      // custom:true, //自定义 tabBar
       list: [
         {
           text: '首页',
