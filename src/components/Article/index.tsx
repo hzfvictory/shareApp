@@ -31,9 +31,14 @@ export default class Index extends Component<TProps> {
                 <Image className='article-thumb'
                        src='https://imgssl.justcome.cn/Fs_QMcioOUnMxoFH0Uckowl_QPRW?imageView2/2/w/640/interlace/1'
                 /> :
-                <Image className='article-thumb'
-                       src={thumb}
-                />
+
+                <View className='hex'>
+                  <View className='hexIn'>
+                    <View className='hexLink'>
+                      <Image mode={'aspectFit'} src={thumb}  className={'hex-img'}/>
+                    </View>
+                  </View>
+                </View>
             }
           </View>
           <View className='article-content'>

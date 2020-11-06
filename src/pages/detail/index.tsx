@@ -36,6 +36,7 @@ export default class Index extends Component<IState> {
 
   componentDidMount(): void {
     const {id, title} = this.$router.params;
+    this.setTitle(title);
 
     this.setState({id, title}, () => {
       this.queryData()
